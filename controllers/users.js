@@ -26,7 +26,11 @@ export const getUserById = (req, res) => {
 
 	const found_user = users.find((user) => user.id === id);
 
-	res.send(found_user || "No User Found");
+	if (found_user) {
+		res.send(found_user);
+	} else {
+		res.status(404).send(`User with the id ${id} not found.`);
+	}
 };
 
 export const deleteUserById = (req, res) => {
